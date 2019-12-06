@@ -69,8 +69,7 @@ endmodule
 
 module alu_legacy(input  logic [31:0] a, b,
            input  logic [2:0]  alucontrol,
-           output logic [31:0] result,
-           output logic        zero);
+           output logic [31:0] result);
 
   logic [31:0] bout, sum;
 
@@ -85,5 +84,4 @@ module alu_legacy(input  logic [31:0] a, b,
       2'b11: result = sum[31];
     endcase
 
-  assign zero = (result == 32'b0);
 endmodule
