@@ -18,10 +18,10 @@ module controller(input   logic        clk, reset,
             regdstD, regwriteD;
  logic [2:0] alucontrolD;
  logic       memwriteE;
- maindec_legacy md(opD, memtoregD, memwriteD, branchD, bneD,
+ maindec md(opD, memtoregD, memwriteD, branchD, bneD,
             alusrcD, regdstD, regwriteD, jumpD, extendD,
             aluopD);
- aludec_legacy  ad(functD, aluopD, alucontrolD);
+ aludec  ad(functD, aluopD, alucontrolD);
  assign pcsrcD = (branchD & equalD) | (bneD & nequalD);
  
  // pipeline registers
