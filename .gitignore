@@ -1,3 +1,4 @@
+pipe
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -11,3 +12,5 @@ src/decoders
 src/units
 work
 transcript
+.fuse_hidden0000006800000001
+pipline.mpf

@@ -1,6 +1,6 @@
 //  `include "../src/top.sv"
 
-module testbench();
+module test();
  logic         clk;
  logic         reset;
  logic [31:0] writedata, dataadr;
