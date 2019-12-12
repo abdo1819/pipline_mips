@@ -11,12 +11,12 @@ module controller(input   logic        clk, reset,
                   output  logic       regdstE, regwriteE, 
                   output  logic       regwriteM, regwriteW,
                   output  logic       jumpD, extendD,
-                  output  logic [2:0] alucontrolE);
+                  output  logic [3:0] alucontrolE);
 				  
  logic [1:0] aluopD;
  logic       memtoregD, memwriteD, alusrcD,
             regdstD, regwriteD;
- logic [2:0] alucontrolD;
+ logic [3:0] alucontrolD;
  logic       memwriteE;
  maindec md(opD, memtoregD, memwriteD, branchD, bneD,
             alusrcD, regdstD, regwriteD, jumpD, extendD,
