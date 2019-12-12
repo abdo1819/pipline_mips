@@ -10,7 +10,7 @@ module mips(input  logic        clk, reset,
              pcsrcD,
              memtoregE, memtoregM, memtoregW, 
              regwriteE, regwriteM, regwriteW;
- logic [2:0]  alucontrolE;
+ logic [4:0]  alucontrolE;
  logic        flushE, equalD, nequalD;
  
  controller c(clk, reset, opD, functD, flushE, 

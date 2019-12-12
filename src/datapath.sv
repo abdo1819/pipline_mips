@@ -4,7 +4,7 @@ module datapath(input   logic         clk, reset,
                 input   logic         alusrcE, regdstE,
                 input   logic         regwriteE, regwriteM, regwriteW, 
                 input   logic         jumpD, extendD,
-                input   logic  [2:0]  alucontrolE,
+                input   logic  [4:0]  alucontrolE,
                 output  logic        equalD, nequalD,
                 output  logic [31:0] pcF,
                 input   logic  [31:0] instrF,
@@ -16,7 +16,7 @@ module datapath(input   logic         clk, reset,
  logic        forwardaD, forwardbD;
  logic [1:0]  forwardaE, forwardbE;
  logic        stallF;
- logic [4:0]  rsD, rtD, rdD, rsE, rtE, rdE;
+ logic [4:0]  rsD, rtD, rdD, shD, rsE, rtE, rdE, shE;
  logic [4:0]  writeregE, writeregM, writeregW;
  logic        flushD;
  logic [31:0] pcnextFD, pcnextbrFD, pcplus4F, pcbranchD;
@@ -70,6 +70,7 @@ module datapath(input   logic         clk, reset,
  assign rsD = instrD[25:21];
  assign rtD = instrD[20:16];
  assign rdD = instrD[15:11];
+ assign shD = instrD[10:6];
  assign flushD = (pcsrcD & ~stallD) | jumpD;
  
  // Execute stage 
@@ -79,10 +80,11 @@ module datapath(input   logic         clk, reset,
  floprc #(5)  r4E(clk, reset, flushE, rsD, rsE);
  floprc #(5)  r5E(clk, reset, flushE, rtD, rtE);
  floprc #(5)  r6E(clk, reset, flushE, rdD, rdE);
+ floprc #(5)  r7E(clk, reset, flushE, shD, shE);
  mux3 #(32)  forwardaemux(srcaE, resultW, aluoutM, forwardaE, srca2E);
  mux3 #(32)  forwardbemux(srcbE, resultW, aluoutM, forwardbE, srcb2E);
  mux2 #(32)  srcbmux(srcb2E, immE, alusrcE, srcb3E);
- alu         alu(srca2E, srcb3E, alucontrolE, aluoutE);
+ alu         alu(srca2E, srcb3E, shE, alucontrolE, aluoutE);
  mux2 #(5)   wrmux(rtE, rdE, regdstE, writeregE);
  
  // Memory stage
