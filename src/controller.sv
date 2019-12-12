@@ -1,7 +1,3 @@
-//  `include "building_blocks/flopers.sv"
-//  `include "decoders/*"
-// //  `include "decoders/maindec.sv"
-
 module controller(input   logic        clk, reset,
                   input   logic  [5:0] opD, functD,
                   input   logic        flushE, equalD, nequalD,
